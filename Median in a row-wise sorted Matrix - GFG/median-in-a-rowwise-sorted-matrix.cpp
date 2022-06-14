@@ -20,10 +20,10 @@ public:
         }
         
         int mid,ne=0,ae=(r*c+1)/2;
-        while(mi<mx)
+        while(mi<=mx)
         {
             ne=0;
-            mid=mi+(mx-mi)/2;
+            mid=(mx+mi)/2;
             for(int z=0;z<r;++z)
             {
                 ne+=upper_bound(a[z].begin(),a[z].end(),mid)-a[z].begin();
@@ -38,7 +38,7 @@ public:
             }
             else
             {
-                mx=mid;
+                mx=mid-1;
             }
         }
         
