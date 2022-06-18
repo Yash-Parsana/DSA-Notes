@@ -5,7 +5,6 @@ public:
     vector<int> v;
     
     StockSpanner() {
-        s=stack<int>();
     }
     
     int next(int p) {
