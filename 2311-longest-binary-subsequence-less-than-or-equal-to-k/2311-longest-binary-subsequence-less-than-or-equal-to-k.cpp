@@ -11,7 +11,6 @@ int longestSubsequence(string s, int k) {
         pow <<= 1;
     }
     
-    cout<<count(begin(s), end(s), '0')<<" "<<cnt<<endl;
     
     return count(begin(s), end(s), '0') + cnt;
 }
