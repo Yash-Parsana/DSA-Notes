@@ -12,6 +12,6 @@ int longestSubsequence(string s, int k) {
     }
     
     
-    return count(begin(s), end(s), '0') + cnt;
+    return count(s.begin(), s.end(), '0') + cnt;
 }
 };
