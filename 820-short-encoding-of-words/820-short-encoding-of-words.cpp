@@ -24,7 +24,7 @@ public:
             
             //Deleting record of any suffix of the word from hash map as it is already covered.
             for(int j=k-1; j>=0; j--){
-                string s = words[i].substr(j, k-j);
+                string s = words[i].substr(j);
                 mp[s] = 0;
             }
         }
