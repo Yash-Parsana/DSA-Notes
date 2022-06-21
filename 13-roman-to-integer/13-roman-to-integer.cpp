@@ -3,7 +3,7 @@ public:
     int romanToInt(string s) {
         
         
-        map<char, int> m;
+        unordered_map<char, int> m;
         m['M'] = 1000;
         m['D'] = 500;
         m['C'] = 100;
