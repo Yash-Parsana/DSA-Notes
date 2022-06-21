@@ -18,9 +18,7 @@ public:
                 
                 b-=pq.top();
                 pq.pop();
-            }
-            
-            
+            } 
         }
         
         return h.size()-1;
