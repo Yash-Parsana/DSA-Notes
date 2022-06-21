@@ -6,6 +6,7 @@ public:
         
         for(int z=0;z<h.size()-1;z++)
         {
+            cout<<h[z+1]<<" "<<h[z]<<endl;
             int d=h[z+1]-h[z];
             
             if(d<=0)continue;
