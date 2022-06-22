@@ -8,6 +8,7 @@ string countAndSay(int n) {
 
     if(n==2)
         return dp[2]= "11";
+    
     if(!dp[n].empty()) return dp[n];
     
     string str = countAndSay(n - 1);
