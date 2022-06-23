@@ -1,7 +1,7 @@
 class Solution {
 public:
     
-    static bool cmp(vector<int> v1,vector<int> v2)
+    static bool cmp(vector<int> &v1,vector<int> &v2)
     {
         return v1[1]<v2[1];    
     }
@@ -25,10 +25,3 @@ public:
         return pq.size();
     }
 };
-//The below code improves IO runtime.
-static const int _ = []() {
-    ios::sync_with_stdio(false);
-    cin.tie(nullptr);
-    cout.tie(nullptr);
-    return 0;
-}();
