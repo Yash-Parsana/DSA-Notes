@@ -1,31 +1,34 @@
 class Solution {
 public:
     
-    int scheduleCourse(vector<vector<int>>& courses) {
-        vector<pair<int,int>> a;
-        for (auto &c: courses) {
-            a.push_back(make_pair(c[1], c[0]));
-        }
-        sort(a.begin(), a.end());
-        priority_queue<int> q;
-        int end = 0;
-        int result = 0;
-        for (auto &c: a) {
-            int d = c.second;
-            if (c.first - d >= end) {
-                q.push(d);
-                end += d;
-                result++;
-            }
-            else if (!q.empty()) {
-                int x = q.top();
-                if (x > d) {
-                    q.pop();
-                    q.push(d);
-                    end -= x - d;
-                }
+    static bool cmp(vector<int> v1,vector<int> v2)
+    {
+        return v1[1]<v2[1];    
+    }
+    
+    int scheduleCourse(vector<vector<int>>& c) {
+        
+        sort(c.begin(),c.end(),cmp);
+        
+        priority_queue<int> pq;
+        
+        int time=0;
+        for(int z=0;z<c.size();z++)
+        {
+            time+=c[z][0];
+            pq.push(c[z][0]);
+            if(time>c[z][1])
+            {
+                time-=pq.top();pq.pop();
             }
         }
-        return result;
+        return pq.size();
     }
 };
+//The below code improves IO runtime.
+static const int _ = []() {
+    ios::sync_with_stdio(false);
+    cin.tie(nullptr);
+    cout.tie(nullptr);
+    return 0;
+}();
