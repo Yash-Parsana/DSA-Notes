@@ -34,7 +34,7 @@ public:
         
     }
     
-    void recoverTree(TreeNode* root) {
+    void recoverTree(TreeNode* &root) {
         
         TreeNode* f=NULL,*s=NULL,*pre=NULL;
         
