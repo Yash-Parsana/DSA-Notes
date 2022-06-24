@@ -14,7 +14,7 @@ public:
     
     void solve(TreeNode* &root,TreeNode* &f,TreeNode* &s,TreeNode* &pre)
     {
-        if(!root)return;
+        if(!root)return ;
         
         solve(root->left,f,s,pre);
         if(pre&&pre->val>root->val)
