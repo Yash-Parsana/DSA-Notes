@@ -1,6 +1,6 @@
 class Solution {
 public:
-    bool Bipartite(int curr,bool c,vector<vector<int>> adj,vector<bool>&vis,vector<bool> &color)
+    bool Bipartite(int curr,bool c,vector<vector<int>> &adj,vector<bool>&vis,vector<bool> &color)
     {
         vis[curr] = 1;
         color[curr] = c;
