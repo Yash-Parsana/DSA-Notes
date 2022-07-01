@@ -2,15 +2,14 @@ class Solution {
 public:
     int fib(int n) {
         if(n==0||n==1)return n;
-        vector<int> f(n+1,0);
         
-        f[0]=0;f[1]=1;
-        
+        int pre1=1,pre2=0,curr=0;
         for(int z=2;z<=n;z++)
         {
-            f[z]=f[z-1]+f[z-2];
+            curr=pre1+pre2;
+            pre2=pre1;
+            pre1=curr;
         }
-        
-        return f[n];
+        return curr;
     }
 };
