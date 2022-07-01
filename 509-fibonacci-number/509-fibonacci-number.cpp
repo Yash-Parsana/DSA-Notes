@@ -1,6 +1,6 @@
 class Solution {
 public:
-    int fib(int n) {
+    int fib(int &n) {
         if(n==0||n==1)return n;
         
         int pre1=1,pre2=0,curr=0;
