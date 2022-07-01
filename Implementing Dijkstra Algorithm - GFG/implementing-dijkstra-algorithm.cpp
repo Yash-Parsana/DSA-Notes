@@ -22,7 +22,7 @@ class Solution
             
             int curr=(*st.begin()).second;
             int w=(*st.begin()).first;
-            vis[curr]=1;
+            // vis[curr]=1;
             st.erase({w,curr});
             for(auto i:adj[curr])
             {
