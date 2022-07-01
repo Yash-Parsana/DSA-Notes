@@ -10,23 +10,23 @@ class Solution
     //from the source vertex S.
     vector <int> dijkstra(int n, vector<vector<int>> adj[], int s)
     {
-        vector<bool>vis(n,0);
+
         
         set<pair<int,int>> st;
         st.insert({0,s});
-        vis[s]=1;
+
         vector<int>ans(n,INT_MAX);
         ans[s]=0;
-        for(int z=0;z<n-1;z++)
+        while(!st.empty())
         {
             
             int curr=(*st.begin()).second;
             int w=(*st.begin()).first;
-            // vis[curr]=1;
+            
             st.erase({w,curr});
             for(auto i:adj[curr])
             {
-                if(!vis[i[0]]&&ans[i[0]]>w+i[1])
+                if(ans[i[0]]>w+i[1])
                 {
                     st.erase({ans[i[0]],i[0]});
                     ans[i[0]]=w+i[1];
