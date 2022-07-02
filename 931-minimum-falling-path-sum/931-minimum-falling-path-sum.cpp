@@ -1,36 +1,30 @@
 class Solution {
 public:
-    
-    int solve(vector<vector<int>> &v,int i,int j,int &n,vector<vector<int>> &dp)
-    {
-        if(i==n-1)
-        {
-            return v[i][j];
-        }
-            
-        if(dp[i][j]!=-1)return dp[i][j];
-        
-        
-        int ans=solve(v,i+1,j,n,dp);
-        
-        if(j-1>=0)
-            ans=min(ans,solve(v,i+1,j-1,n,dp));
-        if(j+1<n)
-            ans=min(ans,solve(v,i+1,j+1,n,dp));
-        
-        return dp[i][j]=ans+v[i][j];
-    
-    }
-    
     int minFallingPathSum(vector<vector<int>>& v) {
-        
         int n=v.size();
-        int ans=1e5;
+        vector<vector<int>> dp(n,vector<int>(n,0));
         
         for(int z=0;z<n;z++)
         {
-            vector<vector<int>> dp(n,vector<int>(n,-1));
-            ans=min(ans,solve(v,0,z,n,dp));
+            dp[0][z]=v[0][z];
+        }
+        
+
+        for(int z=1;z<n;z++)
+        {
+            for(int y=0;y<n;y++)
+            {
+                dp[z][y]=dp[z-1][y];
+                
+                if(y!=0)dp[z][y]=min(dp[z][y],dp[z-1][y-1]);
+                if(y!=n-1)dp[z][y]=min(dp[z][y],dp[z-1][y+1]);
+                dp[z][y]+=v[z][y];
+            }
+        }
+        int ans=1e5;
+        for(int z=0;z<n;z++)
+        {
+            ans=min(ans,dp[n-1][z]);
         }
         return ans;
     }
