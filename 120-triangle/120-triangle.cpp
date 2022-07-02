@@ -1,26 +1,31 @@
 class Solution {
 public:
-    
-    int solve(vector<vector<int>> &v,int i,int j,vector<vector<int>> &dp)
-    {
-        if(i>=v.size())return 1e8;
-        if(i==v.size()-1)
+    int minimumTotal(vector<vector<int>>& v) {
+        
+        int n=v.size();
+        vector<vector<int>> dp(n,vector<int>(n,1e5));
+        
+        dp[0][0]=v[0][0];
+        for(int z=1;z<n;z++)
         {
-            return v[i][j];
+            dp[z][0]=dp[z-1][0]+v[z][0];
         }
         
-        if(dp[i][j]!=-1)return dp[i][j];
+        for(int z=1;z<n;z++)
+        {
+            for(int y=1;y<=z;y++)
+            {
+                dp[z][y]=min(dp[z-1][y],dp[z-1][y-1])+v[z][y];
+            }
+        }
         
-        return dp[i][j]=min(solve(v,i+1,j,dp),solve(v,i+1,j+1,dp))+v[i][j];
-    
-    }
-    
-    int minimumTotal(vector<vector<int>>& v) {
-        int n=v.size();
+
         
-        vector<vector<int>> dp(n,vector<int>(n,-1));
-        
-        return solve(v,0,0,dp);
-        
+        int ans=1e5;
+        for(int z=0;z<n;z++)
+        {
+            ans=min(ans,dp[n-1][z]);
+        }
+        return ans;
     }
 };
