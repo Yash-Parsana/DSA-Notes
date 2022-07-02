@@ -1,26 +1,35 @@
 class Solution {
 public:
-    
-    int solve(vector<vector<int>>&v,int &n,int &m,int i,int j,vector<vector<int>> &dp)
-    {
-        if(i>=n||j>=m||v[i][j]==1)return 0;
-        
-        if(i==n-1&&j==m-1)return 1;
-    
-        if(dp[i][j]!=-1)return dp[i][j];
-        
-        return dp[i][j]=solve(v,n,m,i+1,j,dp)+solve(v,n,m,i,j+1,dp);
-    
-    }
-    
-    
     int uniquePathsWithObstacles(vector<vector<int>>& v) {
-     
+        
         int n=v.size();
         int m=v[0].size();
-        vector<vector<int>> dp(n,vector<int> (m,-1));
+        vector<vector<int>> dp(n,vector<int>(m,0));
         
-        return solve(v,n,m,0,0,dp);
+        for(int z=0;z<n;z++)
+        {
+            if(v[z][0]==1)break;
+            
+            dp[z][0]=1;
+            
+        }
+        for(int z=0;z<m;z++)
+        {
+            if(v[0][z]==1)break;
+            
+            dp[0][z]=1;
+        }
+        
+        for(int z=1;z<n;z++)
+        {
+            for(int y=1;y<m;y++)
+            {
+                if(v[z][y]!=1)
+                    dp[z][y]=dp[z-1][y]+dp[z][y-1];
+            }
+        }
+        
+        return dp[n-1][m-1];
         
     }
 };
