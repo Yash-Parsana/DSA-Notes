@@ -1,29 +1,27 @@
 class Solution {
 public:
-    
-    int minjump(vector<int> &v,int i,vector<int> &dp)
-    {
-        
-        if(i==v.size()-1)
-        {
-            return 0;
-        }
-        
-        if(dp[i]!=-1)return dp[i];
-        
-        int ans=1e6;
-        
-        for(int z=i+1;z<=i+v[i]&&z<v.size();z++)
-        {
-            ans=min(ans,minjump(v,z,dp)+1);
-        }
-        return dp[i]=ans;
-    }
-    
     int jump(vector<int>& nums) {
-        vector<int> dp(nums.size(),-1);
+        int ans=0;
         
-        return minjump(nums,0,dp);
-        
+        int i=0,jump=0;
+        while(i<nums.size()-1)
+        {
+            int temp=0,idx=i;
+            if(i+nums[i]>=nums.size()-1)
+            {
+                ans++;break;
+            }
+            for(int z=i+1;z<=i+nums[i];z++)
+            {
+                if(z+nums[z]>temp)
+                {
+                    idx=z;
+                    temp=z+nums[z];
+                }
+            }
+            ans++;
+            i=idx;
+        }
+        return ans;
     }
 };
