@@ -1,8 +1,9 @@
 class Solution {
 public:
     
-    int minjump(vector<int> &v,int i,vector<int> &dp)
+    int minjump(vector<int> &v,int &i,vector<int> &dp)
     {
+        
         if(i==v.size()-1)
         {
             return 0;
@@ -21,8 +22,8 @@ public:
     
     int jump(vector<int>& nums) {
         vector<int> dp(nums.size(),-1);
-        
-        return minjump(nums,0,dp);
+        int i=0;
+        return minjump(nums,i,dp);
         
     }
 };
