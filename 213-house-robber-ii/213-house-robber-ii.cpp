@@ -3,17 +3,18 @@ public:
     
     int rob(vector<int>& nums,int i,int n) {
         
-        vector<int> dp(n,0);
         
-        dp[i]=nums[i];
-        dp[i+1]=max(dp[i],nums[i+1]);
-        
+        int pre2=nums[i];
+        int pre1=max(nums[i],nums[i+1]);
+        int curr=pre1;
         
         for(int z=i+2;z<n;z++)
         {
-            dp[z]=max(dp[z-2]+nums[z],dp[z-1]);
+            curr=max(pre2+nums[z],pre1);
+            pre2=pre1;
+            pre1=curr;
         }
-        return dp[n-1];
+        return curr;
     }
     
     int rob(vector<int>& nums) {
