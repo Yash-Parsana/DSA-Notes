@@ -7,16 +7,14 @@ public:
         
         if(n==1)return nums[0];
         
-        vector<int> dp(n,0);
-        
-        dp[0]=nums[0];
-        dp[1]=max(dp[0],nums[1]);
-        
+        int pre2=nums[0],pre1=max(nums[0],nums[1]),curr=pre1;
         
         for(int z=2;z<n;z++)
         {
-            dp[z]=max(dp[z-2]+nums[z],dp[z-1]);
+            curr=max(pre2+nums[z],pre1);
+            pre2=pre1;
+            pre1=curr;
         }
-        return dp[n-1];
+        return curr;
     }
 };
