@@ -1,27 +1,20 @@
 class Solution {
 public:
     int jump(vector<int>& nums) {
-        int ans=0;
+        int n=nums.size();
+        vector<int> dp(n,INT_MAX);
+        dp[0]=0;
         
-        int i=0,jump=0;
-        while(i<nums.size()-1)
+        for(int z=0;z<n;z++)
         {
-            int temp=0,idx=i;
-            if(i+nums[i]>=nums.size()-1)
+            for(int y=0;y<z;y++)
             {
-                ans++;break;
-            }
-            for(int z=i+1;z<=i+nums[i];z++)
-            {
-                if(z+nums[z]>temp)
+                if(nums[y]+y>=z)
                 {
-                    idx=z;
-                    temp=z+nums[z];
+                    dp[z]=min(dp[z],dp[y]+1);
                 }
             }
-            ans++;
-            i=idx;
         }
-        return ans;
+        return dp[n-1];
     }
 };
