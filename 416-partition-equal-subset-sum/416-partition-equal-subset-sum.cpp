@@ -1,33 +1,32 @@
 class Solution {
 public:
-    
-    bool solve(vector<int> &v,int k,int i,int &n,vector<vector<int>> &dp)
-    {
-        if(i>=n)return 0;
+    bool canPartition(vector<int>& v) {
         
-        if(dp[i][k]!=-1)return dp[i][k];
-        if(v[i]<=k)
-        {
-            if(v[i]==k)return dp[i][k]=1;
-            if(solve(v,k-v[i],i+1,n,dp))return dp[i][k]=1;
-        }
-        
-        return dp[i][k]=solve(v,k,i+1,n,dp);
-    }
-    
-    
-    bool canPartition(vector<int>& nums) {
-        
+        int n=v.size();
+        if(n==1)return false;
         int k=0;
-        for(int i:nums)
-        {
-            k+=i;
-        }
+        for(int i:v)k+=i;
         if(k&1)return 0;
-        int n=nums.size();
+        k=k/2;
         
-        vector<vector<int>> dp(n,vector<int>(k+1,-1));
+        vector<vector<bool>> dp(n,vector<bool>(k+1,0));
         
-        return solve(nums,k/2,0,n,dp);
+        for(int z=0;z<n;z++)
+        {
+            dp[z][0]=1;
+        }
+        if(v[0]<=k)
+            dp[0][v[0]]=1;
+        
+        for(int z=1;z<n;z++)
+        {
+            for(int target=1;target<=k;target++)
+            {
+                if(target-v[z]>=0)dp[z][target]=dp[z-1][target-v[z]];
+                dp[z][target]=dp[z][target]|dp[z-1][target];
+            }
+        }
+        return dp[n-1][k];
+        
     }
 };
