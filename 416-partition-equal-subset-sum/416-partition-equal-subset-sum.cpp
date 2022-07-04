@@ -9,24 +9,24 @@ public:
         if(k&1)return 0;
         k=k/2;
         
-        vector<bool> dp(k+1,0);
+        vector<vector<bool>> dp(n,vector<bool>(k+1,0));
         
-        dp[0]=1;
-
+        for(int z=0;z<n;z++)
+        {
+            dp[z][0]=1;
+        }
         if(v[0]<=k)
-            dp[v[0]]=1;
+            dp[0][v[0]]=1;
         
-        vector<bool> temp(k+1,0);
         for(int z=1;z<n;z++)
         {
             for(int target=1;target<=k;target++)
             {
-                if(target-v[z]>=0)temp[target]=dp[target-v[z]];
-                temp[target]=temp[target]|dp[target];
+                if(target-v[z]>=0)dp[z][target]=dp[z-1][target-v[z]];
+                dp[z][target]=dp[z][target]|dp[z-1][target];
             }
-            swap(dp,temp);
         }
-        return dp[k];
+        return dp[n-1][k];
         
     }
 };
