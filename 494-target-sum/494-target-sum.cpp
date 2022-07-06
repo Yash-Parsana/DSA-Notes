@@ -7,23 +7,6 @@ public:
     
 //     Problem :- Find all subsequence which sum = s1
     
-    int solve(vector<int>&v,int i,int &n,vector<vector<int>>&dp,int s)
-    {
-        if(i>=n)
-        {
-            if(s==0)return 1;
-            return 0;
-        }
-        if(s==0&&v[i]!=0)return 1;
-
-        if(dp[i][s]!=-1)return dp[i][s];
-        
-        int ans=0;
-        if(v[i]<=s)ans=solve(v,i+1,n,dp,s-v[i]);
-        
-        return dp[i][s]=solve(v,i+1,n,dp,s)+ans;
-    }
-    
     int findTargetSumWays(vector<int>& nums, int target) {
         
         sort(nums.begin(),nums.end());
@@ -34,10 +17,30 @@ public:
         if(abs(target)>sum)return 0;
         if((sum+target)%2)return 0;
         sum=(sum+target)/2;
-        vector<vector<int>> dp(n,vector<int>(sum+1,-1));
- 
+        vector<vector<int>> dp(n,vector<int>(sum+1,0));
+
+        dp[0][0]=1;
+        if(nums[0]<=sum)dp[0][nums[0]]++;
+        // for(int z=0;z<=sum;z++)
+        // {
+        //     cout<<dp[0][z]<<" ";
+        // }
+        // cout<<endl;
+        for(int z=1;z<n;z++)
+        {
+            for(int y=0;y<=sum;y++)
+            {
+                int take=0;
+                if(y>=nums[z])
+                    take=dp[z-1][y-nums[z]];
+                int dontTake=dp[z-1][y];
+                
+                dp[z][y]=take+dontTake;
+                // cout<<dp[z][y]<<" ";
+            }
+            // cout<<endl;
+        }
         
-        return solve(nums,0,n,dp,sum);
-        
+        return dp[n-1][sum];
     }
 };
