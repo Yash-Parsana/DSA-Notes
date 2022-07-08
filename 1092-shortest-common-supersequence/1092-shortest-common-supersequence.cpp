@@ -19,25 +19,15 @@ public:
         {
             for(int y=1;y<=m;y++)
             {
-                int same=0;
                 if(s1[z-1]==s2[y-1])
-                    same=dp[z-1][y-1]+1;
+                    dp[z][y]=dp[z-1][y-1]+1;
             
-                int notsame=max(dp[z-1][y],dp[z][y-1]);
-                
-                dp[z][y]=max(same,notsame);
-            
+                else dp[z][y]=max(dp[z-1][y],dp[z][y-1]);
+                            
             }
         }
         
-//         for(auto i:dp)
-//         {
-//             for(int j:i)
-//             {
-//                 cout<<j<<" ";
-//             }
-//             cout<<endl;
-//         }
+
         
         int i=n,j=m;
         while(i>0&&j>0)
@@ -62,11 +52,6 @@ public:
             }
         }
         
-        // if(i<0&&j<0)
-        // {
-        //     reverse(ans.begin(),ans.end());
-        //     return ans;
-        // }
         
         while(j>0)
         {
