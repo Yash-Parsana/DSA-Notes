@@ -19,11 +19,14 @@ public:
         {
             for(int y=1;y<=m;y++)
             {
+                int same=0;
                 if(s1[z-1]==s2[y-1])
-                    dp[z][y]=dp[z-1][y-1]+1;
+                    same=dp[z-1][y-1]+1;
             
-                else dp[z][y]=max(dp[z-1][y],dp[z][y-1]);
-                            
+                int notsame=max(dp[z-1][y],dp[z][y-1]);
+                
+                dp[z][y]=max(same,notsame);
+            
             }
         }
         
