@@ -16,9 +16,9 @@ public:
                 ans=ans||solve(m,side,n,i+1,parts);
                 parts[z]-=m[i];
             }
-            // if(ans)return 1;
+            if(ans)return 1;
         }
-        return ans;
+        return 0;
     }
     
     
