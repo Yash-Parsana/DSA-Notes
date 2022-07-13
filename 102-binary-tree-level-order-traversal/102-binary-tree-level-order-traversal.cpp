@@ -20,23 +20,20 @@ public:
 
         if(root==NULL) return ans;
         q.push(root);
-        q.push(NULL);
+    
         while(!q.empty())
         {
             vector<int> v;
-            while(!q.empty()&&q.front()!=NULL)
+            int tt=q.size();
+            while(tt--)
             {
                 TreeNode* temp=q.front();q.pop();
                 v.push_back(temp->val);
                 if(temp->left!=NULL)q.push(temp->left);                
                 if(temp->right!=NULL)q.push(temp->right);
             }
-            if(q.front()==NULL)
-            {
+
                 ans.push_back(v);
-                q.pop();
-                if(!q.empty())q.push(NULL);
-            }
         }
         return ans;
         
