@@ -16,11 +16,18 @@ public:
         
     }
     
-    int maxProfit(vector<int>& prices) {
+    int maxProfit(vector<int>& v) {
         
-        vector<vector<int>>dp(prices.size(),vector<int>(2,-1));
+        // vector<vector<int>>dp(prices.size(),vector<int>(2,-1));
         
-        return solve(prices,0,0,dp);
+        // return solve(prices,0,0,dp);
         
+        int ans=0,n=v.size();
+        for(int z=1;z<n;z++)
+        {
+            if(v[z]>v[z-1])
+                ans+=v[z]-v[z-1];
+        }
+        return ans;
     }
 };
