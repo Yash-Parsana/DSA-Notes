@@ -1,110 +1,94 @@
-class TrieNode{
-    public:
-    TrieNode*links[26];
-    // bool f=0;
-    
-    bool containLink(char c)
-    {
-        return links[c-'a']!=NULL;
-    }
-    void put(char c)
-    {
-        links[c-'a']=new TrieNode();
-    }
-    TrieNode*get(char c)
-    {
-        return links[c-'a'];
-    }
-    // void setEnd()
-    // {
-    //     f=1;
-    // }
-    // bool isEnd()
-    // {
-    //     return f;
-    // }
-};
-
-void allWords(TrieNode* curr,int i,int j,vector<vector<char>>&v,vector<vector<bool>>&vis,int &len)
-{
-    // cout<<v[i][j]<<" -> ";
-    if(vis[i][j]||len<0)return;
-    
-    vis[i][j]=1;
-    len--;
-    if(!curr->containLink(v[i][j]))
-    {
-        curr->put(v[i][j]);
-    }
-    curr=curr->get(v[i][j]);
-    if(i+1<v.size())
-    {
-        allWords(curr,i+1,j,v,vis,len);
-    }
-    if(j+1<v[0].size())
-    {
-        allWords(curr,i,j+1,v,vis,len); 
-    }
-    if(i-1>=0)
-    {
-        allWords(curr,i-1,j,v,vis,len); 
-    }
-    if(j-1>=0)
-    {
-        allWords(curr,i,j-1,v,vis,len);     
-    }
-    vis[i][j]=0;
-    len++;
-}
-bool isPresent(string &s,TrieNode* &root)
-{
-    TrieNode*temp=root;
-    for(char c:s)
-    {
-        if(!temp->containLink(c))
-        {
-            return 0;
-        }
-        temp=temp->get(c);
-    }
-    return 1;
-}
-
 class Solution {
-public:
-    vector<string> findWords(vector<vector<char>>& b, vector<string>& words) {
-        int n=b.size(),m=b[0].size();
-        TrieNode*root=new TrieNode();
-        vector<vector<bool>>vis(n,vector<bool>(m,0));
-
-        map<char,bool>mp;
-        int len=-1;
-        for(string s:words)
-        {
-            mp[s[0]]=1;
-            len=max(len,(int)s.size());
-        }
-        
-        for(int z=0;z<n;z++)
-        {
-            for(int y=0;y<m;y++)
-            {
-                if(mp[b[z][y]])
-                {
-                    // cout<<b[z][y]<<endl;
-                    allWords(root,z,y,b,vis,len);                     
-                }
-            }
-        }
-        vector<string>ans;
-        
-        for(string s:words)
-        {
-            if(isPresent(s,root))
-            {
-                ans.push_back(s);
-            }
-        }
-        return ans;
-    }
+  int n, m;
+//Node to create trie
+struct Node {
+    char c;
+    int ends;
+    string word;
+    Node* child[26];
 };
+
+//To create a new Node
+struct Node* getNode(char c) {
+    Node* newNode = new Node;
+    newNode->c = c;
+    newNode->ends = 0;
+    newNode->word = ""; 
+    
+    for(int i=0; i<26; i++) {
+        newNode->child[i] = NULL;
+    }
+    return newNode;
+}
+
+Node* root = getNode('/'); //Root of trie 
+
+//To insert a string into the trie
+void insert(string s) {
+    Node* curr = root;
+    int index, i = 0;
+    while(i < s.length()) {
+        index = s[i]-'a';
+        if(curr->child[index] == NULL) {
+            curr->child[index] = getNode(s[i]);
+        }
+        
+        curr = curr->child[index];
+        i += 1;
+    }
+    
+    curr->ends += 1;
+    curr->word = s;
+}
+
+void solve(int i, int j, vector<vector<char>>& board, vector<string> &v, Node* curr) {
+    int index = board[i][j]-'a'; //Index of current character in board
+    //Base case when character is visited or doesn't have the child
+    if(board[i][j] == '$' || curr->child[index] == NULL)
+        return;
+    
+   // Move to next refrence and check for word end
+    curr = curr->child[index];
+    if(curr->ends > 0) {
+        v.push_back(curr->word);
+        curr->ends -= 1;
+    }
+    
+    //Mark visited and traverse
+    char ch = board[i][j];
+    board[i][j] = '$';
+    
+    if(i > 0)
+    solve(i-1, j, board, v, curr);
+    if(i< n-1)
+    solve(i+1, j, board, v, curr);
+    if(j > 0)
+    solve(i, j-1, board, v, curr);
+    if(j < m-1)
+    solve(i, j+1, board, v, curr);
+    
+    board[i][j] = ch; //Backtrack
+}
+
+public:
+
+    vector<string> findWords(vector<vector<char>>& board, vector<string>& words) {
+         n = board.size();
+    m = board[0].size();
+    
+    //Insert all the words and create trie
+    for(int i=0; i<words.size(); i++) {
+        insert(words[i]);
+    }
+    
+    //Iterate and do a dfs traversal
+    vector<string> v;
+    for(int i=0; i<n; i++) {
+        for(int j=0; j<m; j++) {
+            solve(i, j, board, v, root);
+        }
+    }
+    
+    return v;
+    }
+}; 
