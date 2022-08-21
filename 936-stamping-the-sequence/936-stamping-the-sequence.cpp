@@ -1,6 +1,6 @@
 class Solution {
 public:
-vector<int> movesToStamp(string stamp, string target) {
+vector<int> movesToStamp(string &stamp, string &target) {
   vector<int> res;
   auto total_stamp = 0, turn_stamp = -1;
   while (turn_stamp) {
