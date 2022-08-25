@@ -1,17 +1,18 @@
 class Solution {
 public:
-    bool canConstruct(string ransomNote, string magazine) {
-        unordered_map<char,int> map1;
-        for(int i=0;i<ransomNote.size();i++){
-            map1[ransomNote[i]]++;
+    bool canConstruct(string r, string m) {
+        
+        vector<int> v(26,0);
+        
+        for(char c:m)
+        {
+            v[c-'a']++;
         }
-        for(int i=0;i<magazine.size();i++){
-            map1[magazine[i]]--;
-            if(map1[magazine[i]]<=0)
-                map1.erase(magazine[i]);
+        for(char c:r)
+        {
+            v[c-'a']--;
+            if(v[c-'a']<0)return 0;
         }
-        if(map1.size()==0)
-            return true;
-        return false;
+        return 1;
     }
 };
