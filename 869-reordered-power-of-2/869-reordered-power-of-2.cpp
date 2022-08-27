@@ -9,7 +9,7 @@ public:
 
     long counter(int N) {
         long res = 0;
-        for (; N; N /= 10) res += pow(10, N % 10);
+        for (; N; N /= 10) res += pow(2, N % 10);
         return res;
     }
 };
