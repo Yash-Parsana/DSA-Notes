@@ -4,8 +4,7 @@ public:
     void DFS(vector<vector<bool>> &vis,int i,int j,vector<vector<int>>&v,int &n,int &m)
     {
         
-        vis[i][j]=1;
-        
+        vis[i][j]=1;     
         if(i-1>=0&&vis[i-1][j]==0&&v[i-1][j]>=v[i][j])
             DFS(vis,i-1,j,v,n,m);
         if(j-1>=0&&vis[i][j-1]==0&&v[i][j-1]>=v[i][j])
