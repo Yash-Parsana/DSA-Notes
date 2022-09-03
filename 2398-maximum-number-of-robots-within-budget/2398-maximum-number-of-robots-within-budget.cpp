@@ -5,10 +5,10 @@ public:
     
     
     int maximumRobots(vector<int>& c, vector<int>& r, long long b) {
-        ll temp=b;
+        
         
         int i=0,j=0,ans=0;
-        ll cost=0,sum=0;;
+        ll sum=0;;
         deque<int> dq;
         while(j<c.size())
         {
