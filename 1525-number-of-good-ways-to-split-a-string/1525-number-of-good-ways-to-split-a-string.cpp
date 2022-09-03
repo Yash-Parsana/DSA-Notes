@@ -1,36 +1,31 @@
 class Solution {
 public:
     int numSplits(string s) {
+        int l=0,r=0;
+        vector<int>lr(26,0),rl(26,0);
         int n=s.size();
-        vector<int>l(n,0),r(n,0);
-        vector<bool>v(26,0);
-        int t=0;
-        for(int i=0;i<n;i++)
+        
+        for(char c:s)
         {
-            if(!v[s[i]-'a'])
-            {
-                t++;
-                v[s[i]-'a']=1;
-            }
-            l[i]=t;
+            if(lr[c-'a']==0)
+                r++;
+            lr[c-'a']++;
         }
-        v=vector<bool>(26,0);
-        t=0;
-        for(int i=n-1;i>=0;i--)
-        {
-            if(!v[s[i]-'a'])
-            {
-                t++;
-                v[s[i]-'a']=1;
-            }
-            r[i]=t;
-        }
+
         int ans=0;
-        for(int i=0;i<n-1;i++)
+
+        for(char c:s)
         {
-            if(l[i]==r[i+1])
-                ans++;
+            if(!rl[c-'a'])
+                l++;
+            rl[c-'a']++;
+            if(lr[c-'a']==1)
+                r--;
+            lr[c-'a']--;
+            
+            if(l==r)ans++;
         }
+        
         return ans;
     }
 };
