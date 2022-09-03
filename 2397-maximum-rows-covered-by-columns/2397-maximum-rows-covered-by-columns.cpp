@@ -4,7 +4,7 @@ public:
     void solve(vector<vector<int>>&v,vector<bool>vis,int i,int col,int &n,int &m,int &ans)
     {
         // if(i==m)return;
-        cout<<col<<" "<<i<<endl;
+        // cout<<col<<" "<<i<<endl;
         if(col==0||i==m)
         {
             int tempans=0;
