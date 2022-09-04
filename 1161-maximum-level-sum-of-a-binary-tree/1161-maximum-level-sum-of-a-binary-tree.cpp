@@ -15,35 +15,29 @@ public:
         
         queue<TreeNode*> q;
         
-        int level=0,sum=INT_MIN;
-        
-        int l=1;
-        q.push(root);q.push(NULL);
+        q.push(root);
+        int ans=INT_MAX,sum=INT_MIN,l=0;
         while(!q.empty())
         {
-            int temp=0;
-            while(!q.empty()&&q.front()!=NULL)
+            int n=q.size();
+            int tempsum=0;
+            l++;
+            while(n--)
             {
-                TreeNode* curr=q.front();q.pop();
-                temp+=curr->val;
-                
-                if(curr->left!=NULL)q.push(curr->left);
-                if(curr->right!=NULL)q.push(curr->right);
-                
-            }
-            if(q.front()==NULL)
-            {
+                TreeNode* curr=q.front();
                 q.pop();
-                if(temp>sum)
-                {
-                    sum=temp;
-                    level=l;
-                }
-                l++;
-                if(!q.empty())q.push(NULL);
+                tempsum+=curr->val;
+                if(curr->left)
+                    q.push(curr->left);
+                if(curr->right)
+                    q.push(curr->right);
+            }
+            if(tempsum>sum)
+            {
+                sum=tempsum;
+                ans=l;
             }
         }
-        return level;
-        
+        return ans;
     }
 };
