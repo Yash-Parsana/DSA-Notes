@@ -10,9 +10,6 @@ public:
         
         sort(points.begin(),points.end(),cmp);
         
-        auto s=points.begin();
-        vector<vector<int>> ans(k);
-        copy(s,s+k,ans.begin());
-        return ans;
+        return vector<vector<int>>(points.begin(),points.begin()+k);
     }
 };
