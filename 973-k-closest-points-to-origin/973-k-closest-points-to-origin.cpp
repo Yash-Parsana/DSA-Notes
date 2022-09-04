@@ -1,7 +1,7 @@
 class Solution {
 public:
     
-    static bool cmp(vector<int> p1,vector<int>p2)
+    static bool cmp(vector<int> &p1,vector<int>&p2)
     {
         return (pow(p1[0],2)+pow(p1[1],2))<(pow(p2[0],2)+pow(p2[1],2));
     }
