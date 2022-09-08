@@ -7,7 +7,7 @@ public:
         while(j<f.size())
         {
             mp[f[j]]++;
-            while(mp.size()>2){
+            if(mp.size()>2){
                 if(--mp[f[i]]==0)mp.erase(f[i]);
                 i++;
             }
