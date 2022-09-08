@@ -21,7 +21,6 @@ public:
             }
             j++;
         }
-        if(ans<0)return 0;
         return ans;
     }
 };
