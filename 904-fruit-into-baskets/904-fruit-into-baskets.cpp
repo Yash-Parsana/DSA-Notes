@@ -2,18 +2,29 @@ class Solution {
 public:
     int totalFruit(vector<int>& f) {
         
-        int i=0,j=0,ans=0;
-        map<int,int> mp;
-        while(j<f.size())
+        int pre1=0,pre2=0,temp=0,ans=0,pre1_c=0;
+        // pre2 ,pre1 ,curr
+        for(int curr:f)
         {
-            mp[f[j]]++;
-            if(mp.size()>2){
-                if(--mp[f[i]]==0)mp.erase(f[i]);
-                i++;
+            if(pre1==curr||pre2==curr)
+            {
+                temp++;
+                if(pre1==curr)pre1_c++;
+                else {
+                    pre1_c=1;
+                    swap(pre1,pre2);
+                }
             }
-            ans=max(ans,j-i+1);
-            j++;
+            else{
+                pre2=pre1;
+                pre1=curr;
+                temp=pre1_c+1;
+                pre1_c=1;
+            }
+            
+            ans=max(ans,temp);
         }
+        
         return ans;
     }
 };
