@@ -12,7 +12,7 @@
 class Solution {
 public:
     
-    void solve(TreeNode*root,vector<int>v,int &ans)
+    void solve(TreeNode*root,vector<int>&v,int &ans)
     {
         if(!root->left&&!root->right)
         {
