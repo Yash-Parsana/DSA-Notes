@@ -26,9 +26,6 @@ public:
             if(odd<=1)
             {
                 ans++;
-                // for(int i:v)
-                //     cout<<i<<" ";
-                // cout<<endl;
             }
             return;
                 
