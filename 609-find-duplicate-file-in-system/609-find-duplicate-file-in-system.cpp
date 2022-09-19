@@ -23,7 +23,7 @@ public:
     vector<vector<string>> findDuplicate(vector<string>& paths) {
         int n=paths.size();
         vector<vector<string>> v;
-        map<string,vector<pair<int,int>>> mp;
+        unordered_map<string,vector<pair<int,int>>> mp;
         for(string s:paths)
         {
             // cout<<s<<endl;
