@@ -1,13 +1,13 @@
 class Solution {
 public:
     
-    string betweenTwochar(string s,char l,char r)
+    string betweenTwochar(string &s,char l,char r)
     {
         int i=s.find(l),j=s.find(r);
         return s.substr(i,j-i);
     }
     
-    vector<string> splitBy(string s,char c)
+    vector<string> splitBy(string &s,char c)
     {
         stringstream str(s);
         string segment;
